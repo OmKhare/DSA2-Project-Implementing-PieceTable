@@ -7,14 +7,6 @@
 #include "PieceTable.h"
 #include <ncurses.h>
 
-void PrintS(struct Tree *tree, char *buffer, int *start) {
-    if  (tree == NULL) return;
-    PrintS(tree->left, buffer, start);
-    strncpy(buffer + *start, tree->piece->start, tree->piece->length);
-    *start += tree->piece->length;
-    PrintS(tree->right, buffer, start);
-}
-
 int main() {
     struct Tree *tree = NULL;
     char buffer[800];
@@ -23,7 +15,6 @@ int main() {
     noecho();
 
     keypad(stdscr, TRUE);
-
     int ch;
     int x,y;
     int cx;
@@ -49,16 +40,12 @@ int main() {
                 default:
                     getyx(stdscr, cy, cx);
                     tree = Insert(tree, MakePiece((char *) (&ch), 1), cx);
-
                     getyx(stdscr, cy, cx);
-
                     PrintS(tree, buffer, &start);
                     buffer[start] = '\0';
                     mvaddstr(4, 0, buffer);
                     mvaddstr(0, 0, buffer);
-
                     move(cy, cx+1);
-
                     start = 0;
                     break;
             }

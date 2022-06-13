@@ -12,6 +12,8 @@ void PrintInorder(struct Tree *tree, FILE *p);
 
 void TraverseInorder(struct Tree *tree);
 
+void PrintS(struct Tree *tree, char *buffer, int *start);
+
 void RecursiveInorder(struct Tree *tree,unsigned long int *offset);
 
 struct Tree *Insert(struct Tree *tree,struct Piece *piece,unsigned long int index);

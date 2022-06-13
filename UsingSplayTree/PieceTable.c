@@ -40,7 +40,9 @@ void Log(Logger *L, int level, char *msg, ...) {
 void PrintLog(Logger *L) {
     MessageWrapper *p = L->top;
     if (p == NULL) return;
-    for (struct Message *M; p != NULL; p = p->next) {
+    struct Message *M;
+    for (*M; p != NULL; p = p->next)
+    {
         M = p->m;
         switch (M->level) {
             case 1:
@@ -500,6 +502,16 @@ void RecursiveInorder(struct Tree *tree, unsigned long int *offset) {
     printf("%ld\t\t%ld\t\t%c\n", *offset, tree->piece->length, *tree->piece->start);
     *offset += tree->piece->length;
     RecursiveInorder(tree->right, offset);
+}
+
+void PrintS(struct Tree *tree, char *buffer, int *start)
+{
+    if (tree == NULL)
+        return;
+    PrintS(tree->left, buffer, start);
+    strncpy(buffer + *start, tree->piece->start, tree->piece->length);
+    *start += tree->piece->length;
+    PrintS(tree->right, buffer, start);
 }
 
 void TraverseInorder(struct Tree *tree) {

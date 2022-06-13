@@ -14,7 +14,6 @@
 
 #define CTRL_KEY(x) (x & 0x1f)
 
-
 enum keyboardKeys
 {
   ARROW_LEFT = 500,
@@ -321,6 +320,21 @@ void destroyWriteBuffer(writeBuffer *wb)
   wb->size = 0;
 }
 
+void test()
+{
+  for (int i = 0; i < 10000; i++)
+  {
+    if (addedIndex >= addedSize - 1)
+    {
+      addedSize *= 2;
+      added = (char *)realloc(added, addedSize * sizeof(char));
+    }
+    added[++addedIndex] = 'a';
+    int num = (rand() % (i - 0 + 1)) + 0;
+    insertCharAt(E.PT, num, 0);
+  }
+}
+
 /* Refreshing Screen :
  *      Appends different ANSI Escape Sequence into write Buffer
  *      Also Appends different contents to be displayed on screen (like all characters, message bar, status bar)
@@ -334,7 +348,6 @@ void refreshScreen()
   E.screenrows -= 2; // Since last two rows are for message bar and status bar
   E.rowLen = (int *)realloc(E.rowLen, E.numrows * sizeof(int));
 
-  scrollScreen(); // Update row and col offset if scrolling happened
   char position[20];
   writeBuffer wb;
   initWriteBuffer(&wb); // Init write buffer
@@ -357,7 +370,7 @@ void refreshScreen()
   appendToWriteBuffer(&wb, "\x1b[?25h", 6);
   // Flushing Write Buffer to STD_OUT
   write(STDOUT_FILENO, wb.buf, wb.size);
-  debugPieceTable();
+  //debugPieceTable();
 
   /*              DEBUG SECTION STARTS         */
 #ifdef DEBUGROWLEN
@@ -738,40 +751,7 @@ void cursorMovement(int key)
  *   rowOffset : rows with which scrolled down or up
  *   colOffset : cols with which scrolled left or right
  */
-void scrollScreen()
-{
-  // if this then scroll left by 5 lines
-  if (E.x == E.colOffset + 5)
-  {
-    E.colOffset -= 5;
-    if (E.colOffset < 0)
-      E.colOffset = 0;
-  }
-  // if this then scroll up by 5 lines
-  if (E.y == E.rowOffset + 5)
-  {
-    E.rowOffset -= 5;
-    if (E.rowOffset < 0)
-      E.rowOffset = 0;
-  }
-  // Set colOffset according to E.x
-  if (E.x < E.colOffset)
-    E.colOffset = E.x;
-  if (E.x >= E.colOffset + E.screencols)
-    E.colOffset = E.x - E.screencols + 1;
-  // Set rowOffset according to E.y
-  if (E.y < E.rowOffset)
-    E.rowOffset = E.y;
-  if (E.y >= E.rowOffset + E.screenrows)
-    E.rowOffset = E.y - E.screenrows + 1;
 
-  // If searching and searched word is out of screen then scroll to right
-  if (E.searchEnable)
-  {
-    if (E.x + E.foundLength > E.screencols + E.colOffset)
-      E.colOffset += E.foundLength - (E.x - E.screencols - E.colOffset);
-  }
-}
 
 /*  Function handles different Events
  *  Events happens when user inputs some keys. It read keyboard Input.
@@ -851,9 +831,6 @@ void processKeyInput()
       E.x--;
     E.fileChanged = 1;
     break;
-    E.selectStartRow = E.y;
-    E.selectStartCol = E.x;
-    break;
 
   default:
 
@@ -907,10 +884,6 @@ void initEditor()
 
   E.screenrows -= 2;
   E.rowLen = NULL;
-  E.selectStartRow = 0;
-  E.selectStartCol = 0;
-  E.searchEnable = 0;
-  E.foundLength = 0;
   E.fileChanged = 0;
 }
 
@@ -927,3 +900,4 @@ void deleteEditor()
   E.copyBuff = NULL;
   deletePieceTable(&E.PT);
 }
+

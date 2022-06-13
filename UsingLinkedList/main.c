@@ -16,6 +16,15 @@ int main(int argc, char *argv[])
   // Set Status Message
   setStatusMessage("HELP: Ctrl-Q = Quit | Ctrl-S = Save | Ctrl-H = Help");
 
+  // Testing code.
+  // clock_t start, end;
+  // double diff;
+  // start = clock();
+  // test();
+  // end = clock();
+  // diff = ((double)(end - start)) / CLOCKS_PER_SEC;
+  // printf("%f\n", diff);
+
   // While loop to process keys and refreshscreen
   while (1)
   {

@@ -70,4 +70,5 @@ void editorGoToLine();
 
 void initEditor();
 void deleteEditor();
+void test();
 #endif
