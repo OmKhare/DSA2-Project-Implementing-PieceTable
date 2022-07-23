@@ -58,7 +58,7 @@ void PrintLog(Logger *L) {
                 printf("Code %d: ", M->level);
                 break;
         }
-        fprintf(LOG_TARGET, M->msg);
+        // fprintf(LOG_TARGET, M->msg);
         fprintf(LOG_TARGET, "\n");
     }
 }
