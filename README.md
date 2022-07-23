@@ -28,3 +28,4 @@ a. Insertion of 10000 characters in a 1,50,000 line text took < 1 second.<br/>
 [Build Your Own Text Editor](https://viewsourcecode.org/snaptoken/kilo/index.html) <br/>
 https://darrenburns.net/posts/piece-table/ <br/>
 https://www.cs.unm.edu/~crowley/papers/sds/node15.html <br/>
+https://www.javatpoint.com/splay-tree
