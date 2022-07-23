@@ -15,6 +15,9 @@ a. Insertion of 10000 characters in a 1,50,000 line text took 7.31 seconds:<br/>
 2. Using Splay tree:<br/>
 a. Insertion of 10000 characters in a 1,50,000 line text took < 1 second.<br/>
 
+## Graph of time required per insertion using Splay Tree
+![Graph](https://github.com/OmKhare/DSA2-Project-Implementing-PieceTable/blob/master/Screenshot%202022-06-12%20225915.png)
+
 ## References: <br/>
 [Build Your Own Text Editor](https://viewsourcecode.org/snaptoken/kilo/index.html) <br/>
 https://darrenburns.net/posts/piece-table/ <br/>
