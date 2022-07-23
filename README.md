@@ -18,6 +18,12 @@ a. Insertion of 10000 characters in a 1,50,000 line text took < 1 second.<br/>
 ## Graph of time required per insertion using Splay Tree
 ![Graph](https://github.com/OmKhare/DSA2-Project-Implementing-PieceTable/blob/master/Screenshot%202022-06-12%20225915.png)
 
+## Analysis from graph
+* Spikes are observed in the graph
+* These sipkes are due to the splaying function of the splay tree.
+* Once we edit something and the edited piece of text is splayed to the root of the tree and hence the sudden drop in time required.
+* Although time required in some cases is more, the average time required is very less as compared to linked list implementation.
+
 ## References: <br/>
 [Build Your Own Text Editor](https://viewsourcecode.org/snaptoken/kilo/index.html) <br/>
 https://darrenburns.net/posts/piece-table/ <br/>
