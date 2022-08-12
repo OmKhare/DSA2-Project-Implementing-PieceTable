@@ -21,12 +21,12 @@ a. Insertion of 10000 characters in a 1,50,000 line text took < 1 second.<br/>
 ## Analysis from graph
 * Spikes are observed in the graph
 * These sipkes are due to the splaying function of the splay tree.
-* Once we edit something and the edited piece of text is splayed to the root of the tree and hence the sudden drop in time required.
+* Once we edit something, the edited piece of text is splayed to the root of the tree and hence the sudden drop in time required.
 * Although time required in some cases is more, the average time required is very less as compared to linked list implementation.
 
 ## Conclusion
 * Splay tree method is efficient for normal file editing limiting the size of file to 1000 lines
-* Beyond that, the text editor should switch back to its linked list implemetation of piece table.
+* Beyond that, the text editor should switch back to its linked list implemetation of piece table and auto save feature should be turned off.
 * A combination of splay tree and linked list will be the optimal solution.
 
 ## References: <br/>
